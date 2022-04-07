@@ -1,0 +1,6 @@
+﻿  Assembling asm2.asm...
+asm2.asm(200): warning A6004: procedure argument or local not referenced : hPrevInst
+asm2.asm(200): warning A6004: procedure argument or local not referenced : CmdLine
+asm2.asm(200): warning A6004: procedure argument or local not referenced : CmdShow
+asm2.asm(717): warning A6004: procedure argument or local not referenced : ps2
+  Draw.vcxproj -> C:\Users\User\documents\visual studio 2015\Projects\Assembler Final\Debug\Draw.exe

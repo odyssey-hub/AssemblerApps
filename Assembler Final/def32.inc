@@ -1,0 +1,917 @@
+STD_OUTPUT_HANDLE		equ	-11
+OPEN_EXISTING		equ	3
+OPEN_ALWAYS			equ	4
+CREATE_ALWAYS		equ	2
+GMEM_MOVEABLE		equ	2
+GMEM_ZEROINIT		equ	40h
+
+RECT	struc
+	left		dd	?
+	top		dd	?
+	right		dd	?
+	bottom	dd	?
+RECT	ends
+
+NO_ERROR			equ	0
+ERROR_NO_MORE_ITEMS	equ	259
+
+RESOURCEUSAGE_CONNECTABLE	equ	1
+RESOURCETYPE_ANY			equ	0
+RESOURCE_CONNECTED		equ	1
+
+NTRESOURCE struc
+	dwScope		dd	?
+	dwType		dd	?
+	dwDisplayType	dd	?
+	dwUsage		dd	?
+	lpLocalName	dd	?
+	lpRemoteName	dd	?
+	lpComment	dd	?
+	lpProvider	dd	?
+NTRESOURCE ends
+
+GENERIC_READ		equ	80000000h
+GENERIC_WRITE		equ	40000000h
+FILE_SHARE_READ		equ	1
+FILE_SHARE_WRITE		equ	2
+FILE_ATTRIBUTE_ARCHIVE	equ	20h
+FILE_MAP_READ		equ	04h
+PAGE_READWRITE		equ	04h
+FILE_MAP_WRITE		equ	02h
+
+MB_OK				equ	0
+MB_ICONINFORMATION	equ	40h
+MB_ICONHAND			equ	10h
+MB_ICONERROR		equ	MB_ICONHAND
+IDC_ARROW			equ	32512
+IDI_APPLICATION		equ	32512
+WS_OVERLAPPEDWINDOW 	equ	0CF0000h
+WM_DESTROY			equ	2
+WM_COMMAND			equ	111h
+WM_INITDIALOG		equ	110h
+WM_CLOSE			equ	10h
+WM_MOVE			equ	3h
+CS_HREDRAW			equ	2
+CS_VREDRAW			equ	1
+CW_USEDEFAULT		equ	80000000h
+SW_SHOWNORMAL		equ	1
+COLOR_WINDOW		equ	5
+BN_CLICKED			equ	0
+
+WNDCLASSEX	struc
+	cbSize		dd	?
+	style			dd	?
+	lpfnWndProc		dd	?
+	cbClsExtra		dd	?
+	cbWndExtra		dd	?
+	hInstance		dd	?
+	hIcon			dd	?
+	hCursor		dd	?
+	hbrBackground	dd	?
+	lpszMenuName	dd	?
+	lpszClassName	dd	?
+	hIconSm		dd	?
+WNDCLASSEX	ends
+
+MSG	struc
+	hwnd			dd	?
+	message		dd	?
+	wParam		dd	?
+	lParam		dd	?
+	time			dd	?
+	pt			dd	?
+MSG	ends
+
+WM_USER		equ	400h
+WM_CREATE		equ	1
+WM_ACTIVATE		equ	6
+WM_SETTEXT		equ	0Ch
+WM_GETTEXT		equ	0Dh
+WM_CUT		equ	300h
+WM_COPY		equ	301h
+WM_PASTE		equ	302h
+WM_CLEAR		equ	303h
+WM_UNDO		equ	304h
+WM_SIZE		equ	5
+WM_PAINT          equ   0Fh
+WM_CHAR		equ	102h
+WM_KEYDOWN		equ	100h
+WM_KEYUP		equ	101h
+WM_LBUTTONDOWN	equ	201h
+WM_LBUTTONUP	equ	202h
+WM_LBUTTONDBLCLK	equ	203h
+WM_RBUTTONDOWN	equ	204h
+WM_RBUTTONUP	equ	205h
+WM_RBUTTONDBLCLK	equ	206h
+WM_MBUTTONDOWN	equ	207h
+WM_MBUTTONUP	equ	208h
+WM_MBUTTONDBLCLK	equ	209h
+
+
+WS_VISIBLE		equ	10000000h
+WS_CHILD		equ	40000000h
+WS_EX_CLIENTEDGE 	equ	200h
+ES_LEFT		equ	0
+ES_MULTILINE	equ	4
+ES_AUTOHSCROLL	equ	80h
+ES_AUTOVSCROLL	equ	40h
+EM_GETHANDLE	equ	0BDh
+WM_GETTEXTLENGTH	equ	0Eh
+EM_GETMODIFY	equ	0B8h
+EM_SETMODIFY	equ	0B9h
+EM_UNDO		equ	0C7h
+EM_GETSEL		equ	0B0h
+EM_SETSEL		equ	0B1h
+MB_YESNO		equ	4
+MB_YESNOCANCEL	equ	3h
+MB_ICONWARNING	equ	30h
+IDOK			equ	1
+IDCANCEL		equ	2
+IDABORT		equ	3
+IDRETRY		equ	4
+IDIGNORE		equ	5
+IDYES			equ	6
+PAGE_READONLY	equ 2
+
+OFN_PATHMUSTEXIST		equ	800h
+OFN_FILEMUSTEXIST		equ	1000h
+OFN_EXPLORER		equ	80000h
+OFN_OVERWRITEPROMPT	equ	2
+
+NORMAL_PRIORITY_CLASS	equ	20h
+
+OPENFILENAME		struc
+	lStructSize		dd	?
+	hwndOwner		dd	?
+	_hInstance		dd	?
+	lpstrFilter		dd	?
+	lpstrCustomFilter dd	?
+	nMaxCustFilter	dd	?
+	nFilterIndex	dd	?
+	lpstrFile		dd	?
+	nMaxFile		dd	?
+	lpstrFileTitle	dd	?
+	nMaxFileTitle	dd	?
+	lpstrInitialDir	dd	?
+	lpstrTitle		dd	?
+	Flags			dd	?
+	nFileOffset		dw	?
+	nFileExtension	dw	?
+	lpstrDefExt		dd	?
+	lCustData		dd	?
+	lpfnHook		dd	?
+	lpTemplateName	dd	?
+OPENFILENAME		ends
+
+PAINTSTRUCT			struc
+	hdc			db	?
+	fErase		db	?	
+	rcPaint		RECT	<>
+	fRestore		db	?
+	fIncUpdate		db	?
+	rgbreserved 	db	32 dup(?)		
+PAINTSTRUCT			ends
+
+RECT				struc
+	left			dd	?
+	top			dd	?
+	right			dd	?
+	bottom		dd	?
+RECT				ends
+POINT				STRUCT
+	x			dd	?
+	y			dd	?
+POINT				ENDS
+
+
+FILETIME		STRUCT
+	dwLowDateTime	dd	?
+	dwHighDateTime	dd	?
+FILETIME		ENDS
+
+SYSTEMTIME		STRUCT
+	wYear			dw	?
+	wMonth		dw	?
+	wDayOfWeek		dw	?
+	wDay			dw	?
+	wHour			dw	?
+	wMinute		dw	?
+	wSecond		dw	?
+	wMilliseconds	dw	?
+SYSTEMTIME		ENDS
+
+FILE_ATTRIBUTE_READONLY		equ	001h
+FILE_ATTRIBUTE_HIDDEN		equ	002h
+FILE_ATTRIBUTE_SYSTEM		equ	004h
+FILE_ATTRIBUTE_DIRECTORY	equ	010h
+FILE_ATTRIBUTE_ARCHIVE		equ	020h
+FILE_ATTRIBUTE_NORMAL		equ	080h
+FILE_ATTRIBUTE_TEMPORARY	equ	100h
+FILE_ATTRIBUTE_COMPRESSED	equ	800h
+BST_UNCHECKED			equ	000h
+BST_CHECKED				equ	001h
+BM_GETCHECK				equ	0F0h
+BM_SETCHECK				equ	0F1h
+SIF_RANGE				equ	001h
+SIF_PAGE				equ	002h
+SIF_POS				equ	004h
+SIF_DISABLENOSCROLL		equ	008h
+SIF_TRACKPOS			equ	010h 
+SB_HORZ				equ	000h
+SB_VERT				equ	001h
+SB_CTL				equ	002h
+SB_BOTH				equ	003h
+WS_VSCROLL				equ	200000h
+WS_HSCROLL				equ	100000h
+
+SCROLLINFO	STRUCT
+	cbSize	dd	?
+	fMask		dd	?
+	nMin		dd	?
+	nMax		dd	?
+	nPage		dd	?
+	nPos		dd	?
+	nTrackPos	dd	?
+SCROLLINFO	ENDS
+
+NOTIFYICONDATA	STRUCT
+	cbSize			dd	?
+	hwnd			dd	?
+	uID			dd	?
+	uFlags			dd	?
+	uCallbackMessage	dd	?
+	hIcon			dd	?
+	szTip			db	64 dup (?)
+NOTIFYICONDATA	ENDS
+
+
+ERROR_SUCCESS                        equ 0
+ERROR_INVALID_FUNCTION               equ 1
+ERROR_FILE_NOT_FOUND                 equ 2
+ERROR_PATH_NOT_FOUND                 equ 3
+ERROR_TOO_MANY_OPEN_FILES            equ 4
+ERROR_ACCESS_DENIED                  equ 5
+ERROR_INVALID_HANDLE                 equ 6
+ERROR_ARENA_TRASHED                  equ 7
+ERROR_NOT_ENOUGH_MEMORY              equ 8
+ERROR_INVALID_BLOCK                  equ 9
+ERROR_BAD_ENVIRONMENT                equ 10
+ERROR_BAD_FORMAT                     equ 11
+ERROR_INVALID_ACCESS                 equ 12
+ERROR_INVALID_DATA                   equ 13
+ERROR_OUTOFMEMORY                    equ 14
+ERROR_INVALID_DRIVE                  equ 15
+ERROR_CURRENT_DIRECTORY              equ 16
+ERROR_NOT_SAME_DEVICE                equ 17
+ERROR_NO_MORE_FILES                  equ 18
+ERROR_WRITE_PROTECT                  equ 19
+ERROR_BAD_UNIT                       equ 20
+ERROR_NOT_READY                      equ 21
+ERROR_BAD_COMMAND                    equ 22
+ERROR_CRC                            equ 23
+ERROR_BAD_LENGTH                     equ 24
+ERROR_SEEK                           equ 25
+ERROR_NOT_DOS_DISK                   equ 26
+ERROR_SECTOR_NOT_FOUND               equ 27
+ERROR_OUT_OF_PAPER                   equ 28
+ERROR_WRITE_FAULT                    equ 29
+ERROR_READ_FAULT                     equ 30
+ERROR_GEN_FAILURE                    equ 31
+ERROR_SHARING_VIOLATION              equ 32
+ERROR_LOCK_VIOLATION                 equ 33
+ERROR_WRONG_DISK                     equ 34
+ERROR_SHARING_BUFFER_EXCEEDED        equ 36
+ERROR_HANDLE_EOF                     equ 38
+ERROR_HANDLE_DISK_FULL               equ 39
+ERROR_NOT_SUPPORTED                  equ 50
+ERROR_REM_NOT_LIST                   equ 51
+ERROR_DUP_NAME                       equ 52
+ERROR_BAD_NETPATH                    equ 53
+ERROR_NETWORK_BUSY                   equ 54
+ERROR_DEV_NOT_EXIST                  equ 55
+ERROR_TOO_MANY_CMDS                  equ 56
+ERROR_ADAP_HDW_ERR                   equ 57
+ERROR_BAD_NET_RESP                   equ 58
+ERROR_UNEXP_NET_ERR                  equ 59
+ERROR_BAD_REM_ADAP                   equ 60
+ERROR_PRINTQ_FULL                    equ 61
+ERROR_NO_SPOOL_SPACE                 equ 62
+ERROR_PRINT_CANCELLED                equ 63
+ERROR_NETNAME_DELETED                equ 64
+ERROR_NETWORK_ACCESS_DENIED          equ 65
+ERROR_BAD_DEV_TYPE                   equ 66
+ERROR_BAD_NET_NAME                   equ 67
+ERROR_TOO_MANY_NAMES                 equ 68
+ERROR_TOO_MANY_SESS                  equ 69
+ERROR_SHARING_PAUSED                 equ 70
+ERROR_REQ_NOT_ACCEP                  equ 71
+ERROR_REDIR_PAUSED                   equ 72
+ERROR_FILE_EXISTS                    equ 80
+ERROR_CANNOT_MAKE                    equ 82
+ERROR_FAIL_I24                       equ 83
+ERROR_OUT_OF_STRUCTURES              equ 84
+ERROR_ALREADY_ASSIGNED               equ 85
+ERROR_INVALID_PASSWORD               equ 86
+ERROR_INVALID_PARAMETER              equ 87
+ERROR_NET_WRITE_FAULT                equ 88
+ERROR_NO_PROC_SLOTS                  equ 89
+ERROR_TOO_MANY_SEMAPHORES            equ 100
+ERROR_EXCL_SEM_ALREADY_OWNED         equ 101
+ERROR_SEM_IS_SET                     equ 102
+ERROR_TOO_MANY_SEM_REQUESTS          equ 103
+ERROR_INVALID_AT_INTERRUPT_TIME      equ 104
+ERROR_SEM_OWNER_DIED                 equ 105
+ERROR_SEM_USER_LIMIT                 equ 106
+ERROR_DISK_CHANGE                    equ 107
+ERROR_DRIVE_LOCKED                   equ 108
+ERROR_BROKEN_PIPE                    equ 109
+ERROR_OPEN_FAILED                    equ 110
+ERROR_BUFFER_OVERFLOW                equ 111
+ERROR_DISK_FULL                      equ 112
+ERROR_NO_MORE_SEARCH_HANDLES         equ 113
+ERROR_INVALID_TARGET_HANDLE          equ 114
+ERROR_INVALID_CATEGORY               equ 117
+ERROR_INVALID_VERIFY_SWITCH          equ 118
+ERROR_BAD_DRIVER_LEVEL               equ 119
+ERROR_CALL_NOT_IMPLEMENTED           equ 120
+ERROR_SEM_TIMEOUT                    equ 121
+ERROR_INSUFFICIENT_BUFFER            equ 122
+ERROR_INVALID_NAME                   equ 123
+ERROR_INVALID_LEVEL                  equ 124
+ERROR_NO_VOLUME_LABEL                equ 125
+ERROR_MOD_NOT_FOUND                  equ 126
+ERROR_PROC_NOT_FOUND                 equ 127
+ERROR_WAIT_NO_CHILDREN               equ 128
+ERROR_CHILD_NOT_COMPLETE             equ 129
+ERROR_DIRECT_ACCESS_HANDLE           equ 130
+ERROR_NEGATIVE_SEEK                  equ 131
+ERROR_SEEK_ON_DEVICE                 equ 132
+ERROR_IS_JOIN_TARGET                 equ 133
+ERROR_IS_JOINED                      equ 134
+ERROR_IS_SUBSTED                     equ 135
+ERROR_NOT_JOINED                     equ 136
+ERROR_NOT_SUBSTED                    equ 137
+ERROR_JOIN_TO_JOIN                   equ 138
+ERROR_SUBST_TO_SUBST                 equ 139
+ERROR_JOIN_TO_SUBST                  equ 140
+ERROR_SUBST_TO_JOIN                  equ 141
+ERROR_BUSY_DRIVE                     equ 142
+ERROR_SAME_DRIVE                     equ 143
+ERROR_DIR_NOT_ROOT                   equ 144
+ERROR_DIR_NOT_EMPTY                  equ 145
+ERROR_IS_SUBST_PATH                  equ 146
+ERROR_IS_JOIN_PATH                   equ 147
+ERROR_PATH_BUSY                      equ 148
+ERROR_IS_SUBST_TARGET                equ 149
+ERROR_SYSTEM_TRACE                   equ 150
+ERROR_INVALID_EVENT_COUNT            equ 151
+ERROR_TOO_MANY_MUXWAITERS            equ 152
+ERROR_INVALID_LIST_FORMAT            equ 153
+ERROR_LABEL_TOO_LONG                 equ 154
+ERROR_TOO_MANY_TCBS                  equ 155
+ERROR_SIGNAL_REFUSED                 equ 156
+ERROR_DISCARDED                      equ 157
+ERROR_NOT_LOCKED                     equ 158
+ERROR_BAD_THREADID_ADDR              equ 159
+ERROR_BAD_ARGUMENTS                  equ 160
+ERROR_BAD_PATHNAME                   equ 161
+ERROR_SIGNAL_PENDING                 equ 162
+ERROR_MAX_THRDS_REACHED              equ 164
+ERROR_LOCK_FAILED                    equ 167
+ERROR_BUSY                           equ 170
+ERROR_CANCEL_VIOLATION               equ 173
+ERROR_ATOMIC_LOCKS_NOT_SUPPORTED     equ 174
+ERROR_INVALID_SEGMENT_NUMBER         equ 180
+ERROR_INVALID_ORDINAL                equ 182
+ERROR_ALREADY_EXISTS                 equ 183
+ERROR_INVALID_FLAG_NUMBER            equ 186
+ERROR_SEM_NOT_FOUND                  equ 187
+ERROR_INVALID_STARTING_CODESEG       equ 188
+ERROR_INVALID_STACKSEG               equ 189
+ERROR_INVALID_MODULETYPE             equ 190
+ERROR_INVALID_EXE_SIGNATURE          equ 191
+ERROR_EXE_MARKED_INVALID             equ 192
+ERROR_BAD_EXE_FORMAT                 equ 193
+ERROR_ITERATED_DATA_EXCEEDS_64k      equ 194
+ERROR_INVALID_MINALLOCSIZE           equ 195
+ERROR_DYNLINK_FROM_INVALID_RING      equ 196
+ERROR_IOPL_NOT_ENABLED               equ 197
+ERROR_INVALID_SEGDPL                 equ 198
+ERROR_AUTODATASEG_EXCEEDS_64k        equ 199
+ERROR_RING2SEG_MUST_BE_MOVABLE       equ 200
+ERROR_RELOC_CHAIN_XEEDS_SEGLIM       equ 201
+ERROR_INFLOOP_IN_RELOC_CHAIN         equ 202
+ERROR_ENVVAR_NOT_FOUND               equ 203
+ERROR_NO_SIGNAL_SENT                 equ 205
+ERROR_FILENAME_EXCED_RANGE           equ 206
+ERROR_RING2_STACK_IN_USE             equ 207
+ERROR_META_EXPANSION_TOO_LONG        equ 208
+ERROR_INVALID_SIGNAL_NUMBER          equ 209
+ERROR_THREAD_1_INACTIVE              equ 210
+ERROR_LOCKED                         equ 212
+ERROR_TOO_MANY_MODULES               equ 214
+ERROR_NESTING_NOT_ALLOWED            equ 215
+ERROR_BAD_PIPE                       equ 230
+ERROR_PIPE_BUSY                      equ 231
+ERROR_NO_DATA                        equ 232
+ERROR_PIPE_NOT_CONNECTED             equ 233
+ERROR_MORE_DATA                      equ 234
+ERROR_VC_DISCONNECTED                equ 240
+ERROR_INVALID_EA_NAME                equ 254
+ERROR_EA_LIST_INCONSISTENT           equ 255
+ERROR_NO_MORE_ITEMS                  equ 259
+ERROR_CANNOT_COPY                    equ 266
+ERROR_DIRECTORY                      equ 267
+ERROR_EAS_DIDNT_FIT                  equ 275
+ERROR_EA_FILE_CORRUPT                equ 276
+ERROR_EA_TABLE_FULL                  equ 277
+ERROR_INVALID_EA_HANDLE              equ 278
+ERROR_EAS_NOT_SUPPORTED              equ 282
+ERROR_NOT_OWNER                      equ 288
+ERROR_TOO_MANY_POSTS                 equ 298
+ERROR_MR_MID_NOT_FOUND               equ 317
+ERROR_INVALID_ADDRESS                equ 487
+ERROR_ARITHMETIC_OVERFLOW            equ 534
+ERROR_PIPE_CONNECTED                 equ 535
+ERROR_PIPE_LISTENING                 equ 536
+ERROR_EA_ACCESS_DENIED               equ 994
+ERROR_OPERATION_ABORTED              equ 995
+ERROR_IO_INCOMPLETE                  equ 996
+ERROR_IO_PENDING                     equ 997
+ERROR_NOACCESS                       equ 998
+ERROR_SWAPERROR                      equ 999
+ERROR_STACK_OVERFLOW                 equ 1001
+ERROR_INVALID_MESSAGE                equ 1002
+ERROR_CAN_NOT_COMPLETE               equ 1003
+ERROR_INVALID_FLAGS                  equ 1004
+ERROR_UNRECOGNIZED_VOLUME            equ 1005
+ERROR_FILE_INVALID                   equ 1006
+ERROR_FULLSCREEN_MODE                equ 1007
+ERROR_NO_TOKEN                       equ 1008
+ERROR_BADDB                          equ 1009
+ERROR_BADKEY                         equ 1010
+ERROR_CANTOPEN                       equ 1011
+ERROR_CANTREAD                       equ 1012
+ERROR_CANTWRITE                      equ 1013
+ERROR_REGISTRY_RECOVERED             equ 1014
+ERROR_REGISTRY_CORRUPT               equ 1015
+ERROR_REGISTRY_IO_FAILED             equ 1016
+ERROR_NOT_REGISTRY_FILE              equ 1017
+ERROR_KEY_DELETED                    equ 1018
+ERROR_NO_LOG_SPACE                   equ 1019
+ERROR_KEY_HAS_CHILDREN               equ 1020
+ERROR_CHILD_MUST_BE_VOLATILE         equ 1021
+ERROR_NOTIFY_ENUM_DIR                equ 1022
+ERROR_DEPENDENT_SERVICES_RUNNING     equ 1051
+ERROR_INVALID_SERVICE_CONTROL        equ 1052
+ERROR_SERVICE_REQUEST_TIMEOUT        equ 1053
+ERROR_SERVICE_NO_THREAD              equ 1054
+ERROR_SERVICE_DATABASE_LOCKED        equ 1055
+ERROR_SERVICE_ALREADY_RUNNING        equ 1056
+ERROR_INVALID_SERVICE_ACCOUNT        equ 1057
+ERROR_SERVICE_DISABLED               equ 1058
+ERROR_CIRCULAR_DEPENDENCY            equ 1059
+ERROR_SERVICE_DOES_NOT_EXIST         equ 1060
+ERROR_SERVICE_CANNOT_ACCEPT_CTRL     equ 1061
+ERROR_SERVICE_NOT_ACTIVE             equ 1062
+ERROR_FAILED_SERVICE_CONTROLLER_CONNECT              equ 1063
+ERROR_EXCEPTION_IN_SERVICE           equ 1064
+ERROR_DATABASE_DOES_NOT_EXIST        equ 1065
+ERROR_SERVICE_SPECIFIC_ERROR         equ 1066
+ERROR_PROCESS_ABORTED                equ 1067
+ERROR_SERVICE_DEPENDENCY_FAIL        equ 1068
+ERROR_SERVICE_LOGON_FAILED           equ 1069
+ERROR_SERVICE_START_HANG             equ 1070
+ERROR_INVALID_SERVICE_LOCK           equ 1071
+ERROR_SERVICE_MARKED_FOR_DELETE      equ 1072
+ERROR_SERVICE_EXISTS                 equ 1073
+ERROR_ALREADY_RUNNING_LKG            equ 1074
+ERROR_SERVICE_DEPENDENCY_DELETED     equ 1075
+ERROR_BOOT_ALREADY_ACCEPTED          equ 1076
+ERROR_SERVICE_NEVER_STARTED          equ 1077
+ERROR_DUPLICATE_SERVICE_NAME         equ 1078
+ERROR_END_OF_MEDIA                   equ 1100
+ERROR_FILEMARK_DETECTED              equ 1101
+ERROR_BEGINNING_OF_MEDIA             equ 1102
+ERROR_SETMARK_DETECTED               equ 1103
+ERROR_NO_DATA_DETECTED               equ 1104
+ERROR_PARTITION_FAILURE              equ 1105
+ERROR_INVALID_BLOCK_LENGTH           equ 1106
+ERROR_DEVICE_NOT_PARTITIONED         equ 1107
+ERROR_UNABLE_TO_LOCK_MEDIA           equ 1108
+ERROR_UNABLE_TO_UNLOAD_MEDIA         equ 1109
+ERROR_MEDIA_CHANGED                  equ 1110
+ERROR_BUS_RESET                      equ 1111
+ERROR_NO_MEDIA_IN_DRIVE              equ 1112
+ERROR_NO_UNICODE_TRANSLATION         equ 1113
+ERROR_DLL_INIT_FAILED                equ 1114
+ERROR_SHUTDOWN_IN_PROGRESS           equ 1115
+ERROR_NO_SHUTDOWN_IN_PROGRESS        equ 1116
+ERROR_IO_DEVICE                      equ 1117
+ERROR_SERIAL_NO_DEVICE               equ 1118
+ERROR_IRQ_BUSY                       equ 1119
+ERROR_MORE_WRITES                    equ 1120
+ERROR_COUNTER_TIMEOUT                equ 1121
+ERROR_FLOPPY_ID_MARK_NOT_FOUND       equ 1122
+ERROR_FLOPPY_WRONG_CYLINDER          equ 1123
+ERROR_FLOPPY_UNKNOWN_ERROR           equ 1124
+ERROR_FLOPPY_BAD_REGISTERS           equ 1125
+ERROR_DISK_RECALIBRATE_FAILED        equ 1126
+ERROR_DISK_OPERATION_FAILED          equ 1127
+ERROR_DISK_RESET_FAILED              equ 1128
+ERROR_EOM_OVERFLOW                   equ 1129
+ERROR_NOT_ENOUGH_SERVER_MEMORY       equ 1130
+ERROR_POSSIBLE_DEADLOCK              equ 1131
+ERROR_MAPPED_ALIGNMENT               equ 1132
+ERROR_INVALID_PIXEL_FORMAT           equ 2000
+ERROR_BAD_DRIVER                     equ 2001
+ERROR_INVALID_WINDOW_STYLE           equ 2002
+ERROR_METAFILE_NOT_SUPPORTED         equ 2003
+ERROR_TRANSFORM_NOT_SUPPORTED        equ 2004
+ERROR_CLIPPING_NOT_SUPPORTED         equ 2005
+ERROR_UNKNOWN_PRINT_MONITOR          equ 3000
+ERROR_PRINTER_DRIVER_IN_USE          equ 3001
+ERROR_SPOOL_FILE_NOT_FOUND           equ 3002
+ERROR_SPL_NO_STARTDOC                equ 3003
+ERROR_SPL_NO_ADDJOB                  equ 3004
+ERROR_PRINT_PROCESSOR_ALREADY_INSTALLED              equ 3005
+ERROR_PRINT_MONITOR_ALREADY_INSTALLED                equ 3006
+ERROR_WINS_INTERNAL                  equ 4000
+ERROR_CAN_NOT_DEL_LOCAL_WINS         equ 4001
+ERROR_STATIC_INIT                    equ 4002
+ERROR_INC_BACKUP                     equ 4003
+ERROR_FULL_BACKUP                    equ 4004
+ERROR_REC_NON_EXISTENT               equ 4005
+ERROR_RPL_NOT_ALLOWED                equ 4006
+VK_BACK                              equ 8h
+VK_CANCEL                            equ 3h
+VK_CAPITAL                           equ 14h
+VK_CLEAR                             equ 0Ch
+VK_CONTROL                           equ 11h
+VK_DELETE                            equ 2Eh
+VK_DOWN                              equ 28h
+VK_END                               equ 23h
+VK_ESCAPE                            equ 1Bh
+VK_EXECUTE                           equ 2Bh
+VK_HELP                              equ 2Fh
+VK_HOME                              equ 24h
+VK_INSERT                            equ 2Dh
+VK_LBUTTON                           equ 1h
+VK_LEFT                              equ 25h
+VK_MBUTTON                           equ 4h
+VK_MENU                              equ 12h
+VK_NEXT                              equ 22h
+VK_PAUSE                             equ 13h
+VK_PGDN                              equ 22h
+VK_PGUP                              equ 21h
+VK_PRINT                             equ 2Ah
+VK_PRIOR                             equ 21h
+VK_RBUTTON                           equ 2h
+VK_RETURN                            equ 0Dh
+VK_RIGHT                             equ 27h
+VK_SELECT                            equ 29h
+VK_SHIFT                             equ 10h
+VK_SNAPSHOT                          equ 2Ch
+VK_SPACE                             equ 20h
+VK_TAB                               equ 9h
+VK_UP                                equ 26h
+VK_NUMPAD0                           equ 60h
+VK_NUMPAD1                           equ 61h
+VK_NUMPAD2                           equ 62h
+VK_NUMPAD3                           equ 63h
+VK_NUMPAD4                           equ 64h
+VK_NUMPAD5                           equ 65h
+VK_NUMPAD6                           equ 66h
+VK_NUMPAD7                           equ 67h
+VK_NUMPAD8                           equ 68h
+VK_NUMPAD9                           equ 69h
+VK_MULTIPLY                          equ 6Ah
+VK_ADD                               equ 6Bh
+VK_SEPARATOR                         equ 6Ch
+VK_SUBTRACT                          equ 6Dh
+VK_DECIMAL                           equ 6Eh
+VK_DIVIDE                            equ 6Fh
+VK_F1                                equ 70h
+VK_F2                                equ 71h
+VK_F3                                equ 72h
+VK_F4                                equ 73h
+VK_F5                                equ 74h
+VK_F6                                equ 75h
+VK_F7                                equ 76h
+VK_F8                                equ 77h
+VK_F9                                equ 78h
+VK_F10                               equ 79h
+VK_F11                               equ 7Ah
+VK_F12                               equ 7Bh
+VK_F13                               equ 7Ch
+VK_F14                               equ 7Dh
+VK_F15                               equ 7Eh
+VK_F16                               equ 7Fh
+VK_F17                               equ 80h
+VK_F18                               equ 81h
+VK_F19                               equ 82h
+VK_F20                               equ 83h
+VK_F21                               equ 84h
+VK_F22                               equ 85h
+VK_F23                               equ 86h
+VK_F24                               equ 87h
+VK_NUMLOCK                           equ 90h
+VK_SCROLL                            equ 91h
+VK_LSHIFT                            equ 0A0h
+VK_RSHIFT                            equ 0A1h
+VK_LCONTROL                          equ 0A2h
+VK_RCONTROL                          equ 0A3h
+VK_LMENU                             equ 0A4h
+VK_RMENU                             equ 0A5h
+VK_ATTN                              equ 0F6h
+VK_CRSEL                             equ 0F7h
+VK_EXSEL                             equ 0F8h
+VK_EREOF                             equ 0F9h
+VK_PLAY                              equ 0FAh
+VK_ZOOM                              equ 0FBh
+VK_NONAME                            equ 0FCh
+VK_PA1                               equ 0FDh
+VK_OEM_CLEAR                         equ 0FEh
+VK_0						 equ 30h
+VK_1						 equ 31h
+VK_2						 equ 32h
+VK_3						 equ 33h
+VK_4						 equ 34h
+VK_5						 equ 35h
+VK_6						 equ 36h
+VK_7						 equ 37h
+VK_8						 equ 38h
+VK_9						 equ 39h
+VK_A						 equ 41h
+VK_B						 equ 42h
+VK_C						 equ 43h
+VK_D						 equ 44h
+VK_E						 equ 45h
+VK_F						 equ 46h
+VK_G						 equ 47h
+VK_H						 equ 48h
+VK_I						 equ 49h
+VK_J						 equ 4Ah
+VK_K						 equ 4Bh
+VK_L						 equ 4Ch
+VK_M						 equ 4Dh
+VK_N						 equ 4Eh
+VK_O						 equ 4Fh
+VK_P						 equ 50h
+VK_Q						 equ 51h
+VK_R						 equ 52h
+VK_S						 equ 53h
+VK_T						 equ 54h
+VK_U						 equ 55h
+VK_V						 equ 56h
+VK_W						 equ 57h
+VK_X						 equ 58h
+VK_Y						 equ 59h
+VK_Z						 equ 5Ah
+
+MF_STRING                            equ 0h
+MF_BITMAP                            equ 4h
+MF_OWNERDRAW                         equ 100h
+MF_POPUP                             equ 10h
+MF_SEPARATOR                         equ 800h
+
+SIZE_RESTORED                        equ 0
+SIZE_MINIMIZED                       equ 1
+SIZE_MAXIMIZED                       equ 2
+SIZE_MAXSHOW                         equ 3
+SIZE_MAXHIDE                         equ 4
+SIZENORMAL                           equ SIZE_RESTORED
+SIZEICONIC                           equ SIZE_MINIMIZED
+SIZEFULLSCREEN                       equ SIZE_MAXIMIZED
+SIZEZOOMSHOW                         equ SIZE_MAXSHOW
+SIZEZOOMHIDE                         equ SIZE_MAXHIDE
+
+SW_HIDE                              equ 0
+SW_RESTORE                           equ 9
+
+NIM_ADD                              equ 0h
+NIM_MODIFY                           equ 1h
+NIM_DELETE                           equ 2h
+NIF_MESSAGE                          equ 1h
+NIF_ICON                             equ 2h
+NIF_TIP                              equ 4h
+
+TPM_RIGHTALIGN                       equ 8h
+
+WS_EX_DLGMODALFRAME                  equ 1h
+WS_EX_NOPARENTNOTIFY                 equ 4h
+WS_EX_TOPMOST                        equ 8h
+WS_EX_ACCEPTFILES                    equ 10h
+WS_EX_TRANSPARENT                    equ 20h
+WS_EX_MDICHILD                       equ 00000040h
+WS_EX_TOOLWINDOW                     equ 00000080h
+WS_EX_WINDOWEDGE                     equ 00000100h
+WS_EX_CLIENTEDGE                     equ 00000200h
+WS_EX_CONTEXTHELP                    equ 00000400h
+WS_EX_RIGHT                          equ 00001000h
+WS_EX_LEFT                           equ 00000000h
+WS_EX_RTLREADING                     equ 00002000h
+WS_EX_LTRREADING                     equ 00000000h
+WS_EX_LEFTSCROLLBAR                  equ 00004000h
+WS_EX_RIGHTSCROLLBAR                 equ 00000000h
+WS_EX_CONTROLPARENT                  equ 00010000h
+WS_EX_STATICEDGE                     equ 00020000h
+WS_EX_APPWINDOW                      equ 00040000h
+WS_EX_OVERLAPPEDWINDOW               equ WS_EX_WINDOWEDGE OR WS_EX_CLIENTEDGE
+
+WS_BORDER                            equ 800000h
+
+CHOOSEFONTA STRUCT
+  lStructSize     DWORD      ?
+  hwndOwner       DWORD      ?
+  hDC             DWORD      ?
+  lpLogFont       DWORD      ?
+  iPointSize      DWORD      ?
+  Flags           DWORD      ?
+  rgbColors       DWORD      ?
+  lCustData       DWORD      ?
+  lpfnHook        DWORD      ?
+  lpTemplateName  DWORD      ?
+  hInstance       DWORD      ?
+  lpszStyle       DWORD      ?
+  nFontType        WORD      ?
+  Alignment        WORD      ?
+  nSizeMin        DWORD      ?
+  nSizeMax        DWORD      ?
+CHOOSEFONTA ENDS
+
+LOGFONTA STRUCT
+  lfHeight          DWORD      ?
+  lfWidth           DWORD      ?
+  lfEscapement      DWORD      ?
+  lfOrientation     DWORD      ?
+  lfWeight          DWORD      ?
+  lfItalic          BYTE      ?
+  lfUnderline       BYTE      ?
+  lfStrikeOut       BYTE      ?
+  lfCharSet         BYTE      ?
+  lfOutPrecision    BYTE      ?
+  lfClipPrecision   BYTE      ?
+  lfQuality         BYTE      ?
+  lfPitchAndFamily  BYTE      ?
+  lfFaceName        BYTE      32 dup(?)
+LOGFONTA ENDS
+
+CF_SCREENFONTS          equ 00000001h
+CF_PRINTERFONTS         equ 00000002h
+CF_BOTH                 equ CF_SCREENFONTS + CF_PRINTERFONTS
+CF_SHOWHELP             equ 00000004h
+CF_ENABLEHOOK           equ 00000008h
+CF_ENABLETEMPLATE       equ 00000010h
+CF_ENABLETEMPLATEHANDLE equ 00000020h
+CF_INITTOLOGFONTSTRUCT  equ 00000040h
+CF_USESTYLE             equ 00000080h
+CF_EFFECTS              equ 00000100h
+CF_APPLY                equ 00000200h
+CF_ANSIONLY             equ 00000400h
+CF_NOVECTORFONTS        equ 00000800h
+CF_NOOEMFONTS           equ CF_NOVECTORFONTS
+CF_NOSIMULATIONS        equ 00001000h
+CF_LIMITSIZE            equ 00002000h
+CF_FIXEDPITCHONLY       equ 00004000h
+CF_WYSIWYG              equ 00008000h
+CF_FORCEFONTEXIST       equ 00010000h
+CF_SCALABLEONLY         equ 00020000h
+CF_TTONLY               equ 00040000h
+CF_NOFACESEL            equ 00080000h
+CF_NOSTYLESEL           equ 00100000h
+CF_NOSIZESEL            equ 00200000h 
+
+WM_SETFONT                           equ 30h
+WM_ACTIVATEAPP                       equ 1Ch 
+WM_SHOWWINDOW                        equ 18h
+WM_SETFOCUS                          equ 7h
+
+HKEY_LOCAL_MACHINE                   equ 80000002h
+
+LBS_NOTIFY                           equ 1h
+LBS_SORT                             equ 2h
+LBS_NOREDRAW                         equ 4h
+LBS_MULTIPLESEL                      equ 8h
+LBS_OWNERDRAWFIXED                   equ 10h
+LBS_OWNERDRAWVARIABLE                equ 20h
+LBS_HASSTRINGS                       equ 40h
+LBS_USETABSTOPS                      equ 80h
+LBS_NOINTEGRALHEIGHT                 equ 100h
+LBS_MULTICOLUMN                      equ 200h
+LBS_WANTKEYBOARDINPUT                equ 400h
+LBS_EXTENDEDSEL                      equ 800h
+LBS_DISABLENOSCROLL                  equ 1000h
+LBS_NODATA                           equ 2000h 
+
+KEY_QUERY_VALUE                      equ 1h
+KEY_SET_VALUE                        equ 2h
+KEY_CREATE_SUB_KEY                   equ 4h
+KEY_ENUMERATE_SUB_KEYS               equ 8h
+KEY_NOTIFY                           equ 10h
+KEY_CREATE_LINK                      equ 20h
+KEY_READ                             equ KEY_QUERY_VALUE OR KEY_ENUMERATE_SUB_KEYS OR KEY_NOTIFY
+KEY_WRITE                            equ KEY_SET_VALUE OR KEY_CREATE_SUB_KEY
+KEY_EXECUTE                          equ KEY_READ
+KEY_ALL_ACCESS                       equ KEY_QUERY_VALUE OR KEY_SET_VALUE OR KEY_CREATE_SUB_KEY OR KEY_ENUMERATE_SUB_KEYS OR KEY_NOTIFY OR KEY_CREATE_LINK
+
+LB_ADDSTRING                         equ 180h
+LB_INSERTSTRING                      equ 181h
+LB_DELETESTRING                      equ 182h
+LB_SELITEMRANGEEX                    equ 183h
+LB_RESETCONTENT                      equ 184h
+LB_SETSEL                            equ 185h
+LB_SETCURSEL                         equ 186h
+LB_GETSEL                            equ 187h
+LB_GETCURSEL                         equ 188h
+LB_GETTEXT                           equ 189h
+LB_GETTEXTLEN                        equ 18Ah
+LB_GETCOUNT                          equ 18Bh
+LB_SELECTSTRING                      equ 18Ch
+LB_DIR                               equ 18Dh
+LB_GETTOPINDEX                       equ 18Eh
+LB_FINDSTRING                        equ 18Fh
+LB_GETSELCOUNT                       equ 190h
+LB_GETSELITEMS                       equ 191h
+LB_SETTABSTOPS                       equ 192h
+LB_GETHORIZONTALEXTENT               equ 193h
+LB_SETHORIZONTALEXTENT               equ 194h
+LB_SETCOLUMNWIDTH                    equ 195h
+LB_ADDFILE                           equ 196h
+LB_SETTOPINDEX                       equ 197h
+LB_GETITEMRECT                       equ 198h
+LB_GETITEMDATA                       equ 199h
+LB_SETITEMDATA                       equ 19Ah
+LB_SELITEMRANGE                      equ 19Bh
+LB_SETANCHORINDEX                    equ 19Ch
+LB_GETANCHORINDEX                    equ 19Dh
+LB_SETCARETINDEX                     equ 19Eh
+LB_GETCARETINDEX                     equ 19Fh
+LB_SETITEMHEIGHT                     equ 1A0h
+LB_GETITEMHEIGHT                     equ 1A1h
+LB_FINDSTRINGEXACT                   equ 1A2h
+LB_SETLOCALE                         equ 1A5h
+LB_GETLOCALE                         equ 1A6h
+LB_SETCOUNT                          equ 1A7h
+LB_MSGMAX                            equ 1A8h 
+
+CB_GETEDITSEL                        equ 140h
+CB_LIMITTEXT                         equ 141h
+CB_SETEDITSEL                        equ 142h
+CB_ADDSTRING                         equ 143h
+CB_DELETESTRING                      equ 144h
+CB_DIR                               equ 145h
+CB_GETCOUNT                          equ 146h
+CB_GETCURSEL                         equ 147h
+CB_GETLBTEXT                         equ 148h
+CB_GETLBTEXTLEN                      equ 149h
+CB_INSERTSTRING                      equ 14Ah
+CB_RESETCONTENT                      equ 14Bh
+CB_FINDSTRING                        equ 14Ch
+CB_SELECTSTRING                      equ 14Dh
+CB_SETCURSEL                         equ 14Eh
+CB_SHOWDROPDOWN                      equ 14Fh
+CB_GETITEMDATA                       equ 150h
+CB_SETITEMDATA                       equ 151h
+CB_GETDROPPEDCONTROLRECT             equ 152h
+CB_SETITEMHEIGHT                     equ 153h
+CB_GETITEMHEIGHT                     equ 154h
+CB_SETEXTENDEDUI                     equ 155h
+CB_GETEXTENDEDUI                     equ 156h
+CB_GETDROPPEDSTATE                   equ 157h
+CB_FINDSTRINGEXACT                   equ 158h
+CB_SETLOCALE                         equ 159h
+CB_GETLOCALE                         equ 15Ah
+CB_GETTOPINDEX                       equ 15Bh
+CB_SETTOPINDEX                       equ 15Ch
+CB_GETHORIZONTALEXTENT               equ 15Dh
+CB_SETHORIZONTALEXTENT               equ 15Eh
+CB_GETDROPPEDWIDTH                   equ 15Fh
+CB_SETDROPPEDWIDTH                   equ 160h
+CB_INITSTORAGE                       equ 161h
+CB_MSGMAX                            equ 162h
+
+WMSZ_LEFT 				equ 1
+WMSZ_RIGHT 				equ 2
+WMSZ_TOP 				equ 3
+WMSZ_TOPLEFT 			equ 4
+WMSZ_TOPRIGHT 			equ 5
+WMSZ_BOTTOM 			equ 6
+WMSZ_BOTTOMLEFT 			equ 7
+WMSZ_BOTTOMRIGHT 			equ 8
+
+WM_NEXTMENU 			equ 213h
+WM_SIZING 				equ 214h
+WM_CAPTURECHANGED 		equ 215h
+WM_MOVING 				equ 216h
+WM_POWERBROADCAST 		equ 218h 
+
+REG_NONE                             equ 0
+REG_SZ                               equ 1
+REG_EXPAND_SZ                        equ 2
+REG_BINARY                           equ 3
+REG_DWORD                            equ 4
+REG_DWORD_LITTLE_ENDIAN              equ 4
+REG_DWORD_BIG_ENDIAN                 equ 5
+REG_LINK                             equ 6
+REG_MULTI_SZ                         equ 7

@@ -1,0 +1,5 @@
+﻿  Assembling Source.asm...
+Source.asm(210): warning A6004: procedure argument or local not referenced : hPrevInst
+Source.asm(210): warning A6004: procedure argument or local not referenced : CmdLine
+Source.asm(210): warning A6004: procedure argument or local not referenced : CmdShow
+  Assembler Final.vcxproj -> C:\Users\User\documents\visual studio 2015\Projects\Assembler Final\Debug\Assembler Final.exe
